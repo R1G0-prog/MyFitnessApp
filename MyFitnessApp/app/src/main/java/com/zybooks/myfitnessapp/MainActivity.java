@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
     private final Fragment caloriesFragment = new CaloriesFragment();
     private final Fragment waterFragment = new WaterFragment();
     private final Fragment exerciseFragment = new ExerciseFragment();
+    private final Fragment badgesFragment = new BadgesFragment();
     private Fragment activeFragment = caloriesFragment;
 
     @Override
@@ -36,6 +37,10 @@ public class MainActivity extends AppCompatActivity {
                 .add(R.id.fragment_container, exerciseFragment, "EXERCISE")
                 .hide(exerciseFragment)
                 .commit();
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.fragment_container, badgesFragment, "BADGES")
+                .hide(exerciseFragment)
+                .commit();
     }
 
     private final BottomNavigationView.OnItemSelectedListener navListener =
@@ -55,7 +60,11 @@ public class MainActivity extends AppCompatActivity {
                         Log.d("MainActivity", "Exercises selected");
                         switchToFragment(exerciseFragment);
                         return true;
-                    } else {
+                    } else if (itemId == R.id.nav_badges) {
+                    Log.d("MainActivity", "Badges selected");
+                    switchToFragment(badgesFragment);
+                    return true;
+                } else {
                         return false;
                     }
                 }

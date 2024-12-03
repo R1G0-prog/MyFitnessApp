@@ -29,5 +29,4 @@
         android:name="com.zybooks.myfitnessapp.BadgesFragment"
         android:label="@string/title_badges"
         tools:layout="@layout/fragment_badges" />
-
 </navigation>

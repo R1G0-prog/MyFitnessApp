@@ -1,11 +1,13 @@
 package com.zybooks.myfitnessapp;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,6 +21,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import android.content.Context;
+import android.view.inputmethod.InputMethodManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -107,15 +111,23 @@ public class ExerciseFragment extends Fragment {
         dialog.show();
     }
 
+
+
     private void showDurationDialog(String exerciseName, int caloriesPerMinute) {
         // Inflate the custom duration input dialog
         View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.dialog_add_exercise, null);
+        EditText exerciseNameInput = dialogView.findViewById(R.id.exercise_name);
         EditText durationInput = dialogView.findViewById(R.id.exercise_duration);
 
-        new AlertDialog.Builder(requireContext())
+        // Pre-fill exercise name and make it read-only
+        exerciseNameInput.setText(exerciseName);
+        exerciseNameInput.setFocusable(false);
+        exerciseNameInput.setClickable(false);
+
+        AlertDialog dialog = new AlertDialog.Builder(requireContext())
                 .setTitle("Enter Duration")
                 .setView(dialogView)
-                .setPositiveButton("Add", (dialog, which) -> {
+                .setPositiveButton("Add", (dialogInterface, which) -> {
                     String durationText = durationInput.getText().toString().trim();
 
                     if (TextUtils.isEmpty(durationText)) {
@@ -123,19 +135,35 @@ public class ExerciseFragment extends Fragment {
                         return;
                     }
 
+                    // Add the exercise and update RecyclerView
                     int duration = Integer.parseInt(durationText);
-                    int caloriesBurned = duration * caloriesPerMinute;
-
-                    // Add the exercise to the list
-                    ExerciseItem exercise = new ExerciseItem(exerciseName, duration, caloriesBurned);
-                    viewModel.addExercise(exercise);
-                    filteredExercises.add(exercise);
-                    exerciseAdapter.notifyDataSetChanged();
+                    viewModel.addExercise(new ExerciseItem(exerciseName, duration, caloriesPerMinute * duration));
                     updateTotalCaloriesBurned();
+                    // Refresh the adapter data
+                    filteredExercises.clear();
+                    filteredExercises.addAll(viewModel.getExerciseList());
+                    exerciseAdapter.notifyDataSetChanged();
+
+                    // Clear focus from the search bar
+                    clearSearchBarFocus();
                 })
                 .setNegativeButton("Cancel", null)
-                .show();
+                .create();
+
+        dialog.show();
     }
+
+    private void clearSearchBarFocus() {
+        SearchView searchExerciseView = getView().findViewById(R.id.search_exercise);
+        if (searchExerciseView != null) {
+            searchExerciseView.clearFocus();
+        }
+    }
+
+
+
+
+
 
     private void filterExerciseList(String query) {
         filteredExercises.clear();
