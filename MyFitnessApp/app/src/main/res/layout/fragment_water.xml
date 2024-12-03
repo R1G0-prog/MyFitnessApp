@@ -1,80 +1,74 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:padding="16dp"
     android:background="@color/backgroundColor">
 
     <TextView
-        android:id="@+id/water_tracker_title"
+        android:id="@+id/daily_water_goal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Water Tracker"
-        android:textSize="24sp"
+        android:text="Daily Water Goal: 2000 mL"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="@color/textColorPrimary"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="16dp" />
+        android:layout_gravity="center"/>
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="0dp"
+    <ProgressBar
+        android:id="@+id/water_progress_bar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/water_tracker_title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="4dp">
+        android:progress="0"
+        android:max="2000"
+        android:layout_marginVertical="16dp"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp"
-            android:background="@color/surfaceColor">
-
-            <TextView
-                android:id="@+id/daily_water_goal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Daily Water Goal: 8 glasses"
-                android:textSize="18sp"
-                android:textColor="@color/textColorPrimary" />
-
-            <TextView
-                android:id="@+id/current_water"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Water Consumed: 0 glasses"
-                android:textSize="18sp"
-                android:textColor="@color/textColorPrimary"
-                android:layout_marginTop="8dp" />
-
-            <ProgressBar
-                android:id="@+id/water_progress_bar"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:max="8"
-                android:progress="0"
-                android:layout_marginTop="16dp"
-                android:progressTint="@color/progressBarColor" />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+    <TextView
+        android:id="@+id/current_water"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Water Consumed: 0 mL"
+        android:textSize="16sp"
+        android:layout_gravity="center"/>
 
     <Button
         android:id="@+id/add_water_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Water"
-        app:layout_constraintTop_toBottomOf="@id/water_tracker_title"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
+        android:text="Add 250 mL"
+        android:layout_gravity="center"
         android:backgroundTint="@color/buttonColor"
-        android:textColor="@color/buttonTextColor" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:textColor="@color/buttonTextColor"/>
+
+    <Button
+        android:id="@+id/reset_water_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reset"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/buttonColor"
+        android:textColor="@color/buttonTextColor"/>
+
+    <EditText
+        android:id="@+id/goal_input"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:layout_marginTop="16dp"
+        android:hint="Enter new daily goal (mL)"
+        android:inputType="number"
+        android:textColor="@color/textColorPrimary" />
+
+    <Button
+        android:id="@+id/set_goal_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Set Goal"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/buttonColor"
+        android:textColor="@color/buttonTextColor"/>
+
+</LinearLayout>

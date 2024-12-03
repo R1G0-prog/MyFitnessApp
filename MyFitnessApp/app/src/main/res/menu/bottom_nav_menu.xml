@@ -13,4 +13,9 @@
         android:id="@+id/nav_exercises"
         android:icon="@drawable/fitness_center_24dp_e8eaed_fill0_wght400_grad0_opsz24"
         android:title="Exercises" /> <!-- Title added here -->
+
+    <item
+        android:id="@+id/nav_badges"
+        android:icon="@drawable/baseline_local_fire_department_24dp_e8eaed_fill0_wght400_grad0_opsz24"
+        android:title="Goals" /> <!-- Title added here -->
 </menu>

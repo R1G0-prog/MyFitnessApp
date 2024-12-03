@@ -7,6 +7,7 @@
     <string name="title_calories">Calories</string>
     <string name="title_water">Water</string>
     <string name="title_exercises">Exercises</string>
+    <string name="title_badges">Daily Badges</string>
 
     <!-- Search hints -->
     <string name="search_hint_food">Search for food...</string>
@@ -37,5 +38,10 @@
     <!-- Water Fields -->
     <string name="daily_water_goal_text">Daily Water Goal: %1$d glasses</string>
     <string name="current_water_intake_text">Water Consumed: %1$d glasses</string>
+
+    <!-- Badges Fields -->
+    <string name="hello_blank_fragment">Daily Water Goal:</string>
+
+
 
 </resources>

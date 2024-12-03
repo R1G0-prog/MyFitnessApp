@@ -24,4 +24,10 @@
         android:label="@string/title_exercises"
         tools:layout="@layout/fragment_exercises" />
 
+    <fragment
+        android:id="@+id/navigation_badge"
+        android:name="com.zybooks.myfitnessapp.BadgesFragment"
+        android:label="@string/title_badges"
+        tools:layout="@layout/fragment_badges" />
+
 </navigation>
